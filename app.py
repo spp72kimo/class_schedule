@@ -10,9 +10,9 @@ hour_spec = 8       # 指定發送訊息時間
 while True:
     cur_sec = time.time()
     cur_time = time.localtime(cur_sec)
-    if cur_time.tm_hour == hour + 1:
+    if cur_time.tm_min == hour + 1:
         i = 0
-    if cur_time.tm_hour == hour:
+    if cur_time.tm_min == hour:
         if i == 1:
             continue
         message = client.messages.create(  
