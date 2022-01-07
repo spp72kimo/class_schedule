@@ -5,7 +5,7 @@ account_sid = 'ACfde6f9072071bb544f06c5d38b6a8bfc'
 auth_token = '6eb26590c0ebd7e5818d0559f05746fd' 
 client = Client(account_sid, auth_token) 
 
-i = 0               # 讓訊息只發一次的開關
+i = 0               # 訊息只發一次的開關
 hour_spec = 8       # 指定發送訊息時間
 while True:
     cur_sec = time.time()
