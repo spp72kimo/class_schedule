@@ -11,7 +11,7 @@ def send_msg():
     client = Client(account_sid, auth_token) 
 
     i = 0                # 讓訊息只發一次的開關
-    hour_spec = 58       # 指定發送訊息時間
+    hour_spec = 6       # 指定發送訊息時間
     while True:
         cur_sec = time.time()
         cur_time = time.localtime(cur_sec)
