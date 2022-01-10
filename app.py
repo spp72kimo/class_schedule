@@ -48,8 +48,7 @@ def handle_message(event):
     elif 'H2' in msg:
         result = schedule.find_schedule('H2')
         reply = schedule.show_result(result)
-    elif:
-        'H3' in msg:
+    elif 'H3' in msg:
         result = schedule.find_schedule('H3')
         reply = schedule.show_result(result)
 
