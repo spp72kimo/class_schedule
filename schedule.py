@@ -43,5 +43,5 @@ def show_result(store, result={}):
 	sentence = store + '今日班表：'
 	sentence += str(today) + '\n'
 	for r in result:
-		sentence += r + ' ' + result[r]
+		sentence += r + ' ' + result[r] + '\n'
 	return sentence
