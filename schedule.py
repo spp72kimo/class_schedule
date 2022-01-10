@@ -32,10 +32,25 @@ def find_schedule(store='', day=today.day):
 				schedule[name.value] = represent(status)
 	return schedule
 
+def find_kk(result={}, day=today.day):
+	sentence=''
+	if result['小柯'] == '休假':
+		sentence = '小柯休假喔！'
+	elif result['小柯'] == '早班':
+		sentence = '小柯早班喔！'
+	elif result['JOYA'] == '休假' and result['怡君'] == '早班':
+		sentence = '小柯晚上一個人上班喔^^'
+	elif result['JOYA'] == '早班' and result['怡君'] == '休假':
+			sentence = '小柯晚上一個人上班喔^^'
+	else:
+		sentence = '小柯今天晚上沒有一個人上班...'
+	return sentence
+
+
 # 將班表結果存成字串傳回 return(str)
 def show_result(store, result={}, d=today.day):
 	now = datetime.date(today.year, today.month, d)
-	sentence = str(now) + '\n'
+	sentence = str(now) + ' 當日班表：\n'
 	for r in result:
 		sentence += r + ' ' + result[r] + '\n'
 	return sentence
