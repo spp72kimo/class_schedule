@@ -9,7 +9,7 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
-import datetime
+import datetime as t
 import schedule
 
 
@@ -40,12 +40,14 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    dt1 = t.datetime.utcnow().replace(tzinfo=t.timezone.utc)
+    dt2 = dt1.astimezone(t.timezone(t.timedelta(hours=8))) # 轉換時區 -> 東八區    
+
     msg = event.message.text
     reply = '歡迎查詢Outlet班表\n' + '請輸入\'H2\'或\'H3\''
-    today = datetime.date.today()
-    day = today.day
+    day = dt2.day
     if '時間' in msg:
-        reply = '本地時間是：' + str(datetime.datetime.now())
+        reply = '遠端時間是：' + str(t.datetime.now()) + '\n' + '這裡時間是：' + str(dt2)
     elif 'H2' in msg:
         result = schedule.find_schedule('H2', day)
         reply = schedule.show_result('H2', result, day)

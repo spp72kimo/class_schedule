@@ -1,7 +1,7 @@
 from openpyxl import load_workbook
-import datetime
+import datetime as t
 
-today = datetime.date.today()							# 今天日期
+today = t.date.today()							# 今天日期
 wb = load_workbook('202201.xlsx')					# 讀取班表Excel
 sheet = wb['10011']									# 選擇工作表sheet
 
@@ -49,7 +49,7 @@ def find_kk(result={}, day=today.day):
 
 # 將班表結果存成字串傳回 return(str)
 def show_result(store, result={}, d=today.day):
-	now = datetime.date(today.year, today.month, d)
+	now = t.date(today.year, today.month, d)
 	sentence = str(now) + ' 當日班表：\n'
 	for r in result:
 		sentence += r + ' ' + result[r] + '\n'
