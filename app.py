@@ -63,7 +63,7 @@ def handle_message(event):
     elif '小柯' in msg:
         result = schedule.find_schedule('H3', day)
         reply = schedule.find_kk(result)
-    elif int(msg) > 0 and int(msg) <= 31:
+    elif msg.isdigit() and int(msg) > 0 and int(msg) <= 31:
         day = int(msg)
         result = schedule.find_schedule('H2', day)
         reply = schedule.show_result('H2', result, day)
