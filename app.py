@@ -42,10 +42,10 @@ def callback():
 def handle_message(event):
     dt1 = t.datetime.utcnow().replace(tzinfo=t.timezone.utc)
     dt2 = dt1.astimezone(t.timezone(t.timedelta(hours=8))) # 轉換時區 -> 東八區    
+    day = dt2.day
 
     msg = event.message.text
-    reply = '歡迎查詢Outlet班表\n' + '請輸入\'H2\'或\'H3\''
-    day = dt2.day
+    
     if '時間' in msg:
         reply = '遠端時間是：' + str(t.datetime.now()) + '\n' + '這裡時間是：' + str(dt2)
     elif 'H2' in msg:
@@ -69,6 +69,8 @@ def handle_message(event):
         reply = schedule.show_result('H2', result, day)
         result = schedule.find_schedule('H3', day)
         reply += schedule.show_result('H3', result, day)
+    else:
+        reply = '歡迎查詢Outlet班表\n' + '請輸入\'H2\'或\'H3\'或\'明天\''
 
 
     line_bot_api.reply_message(
