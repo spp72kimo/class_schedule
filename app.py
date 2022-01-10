@@ -47,10 +47,10 @@ def handle_message(event):
         reply = '本地時間是：' + str(time)
     elif 'H2' in msg:
         result = schedule.find_schedule('H2')
-        reply = schedule.show_result(result)
+        reply = schedule.show_result('H2', result)
     elif 'H3' in msg:
         result = schedule.find_schedule('H3')
-        reply = schedule.show_result(result)
+        reply = schedule.show_result('H3', result)
 
     line_bot_api.reply_message(
         event.reply_token,
