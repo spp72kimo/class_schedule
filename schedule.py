@@ -39,13 +39,9 @@ def find_schedule(store=''):
 
 # 將班表結果存成字串傳回 return(str)
 def show_result(store, result={}):
+	#sentence = ''
 	sentence = store + '今日班表：'
 	sentence += str(today) + '\n'
 	for r in result:
 		sentence += r + ' ' + result[r] + '\n'
 	return sentence
-
-result1 = show_result('H3', find_schedule('H3'))
-result2 = show_result('H2', find_schedule('H2'))
-print(result1)
-print(result2)
