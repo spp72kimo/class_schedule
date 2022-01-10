@@ -45,7 +45,7 @@ def handle_message(event):
     today = datetime.date.today()
     day = today.day
     if '時間' in msg:
-        reply = '本地時間是：' + str(time)
+        reply = '本地時間是：' + str(datetime.datetime.now())
     elif 'H2' in msg:
         result = schedule.find_schedule('H2', day)
         reply = schedule.show_result('H2', result, day)
