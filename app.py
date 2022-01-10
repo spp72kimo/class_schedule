@@ -1,36 +1,63 @@
-from twilio.rest import Client 
-from class_schedule import *
-from flask import Flask
+from flask import Flask, request, abort
+
+from linebot import (
+    LineBotApi, WebhookHandler
+)
+from linebot.exceptions import (
+    InvalidSignatureError
+)
+from linebot.models import (
+    MessageEvent, TextMessage, TextSendMessage,
+)
+import datetime
+import schedule
+
 
 app = Flask(__name__)
-@app.route("/")
 
-def send_msg():
-    account_sid = 'ACfde6f9072071bb544f06c5d38b6a8bfc' 
-    auth_token = '6b2bea513a2add06478a950b29e28db3' 
-    client = Client(account_sid, auth_token) 
+line_bot_api = LineBotApi('RuY0urC5XyZu/m4kzz2T4Kycwiiky6qcI7ANvcDg6FWszscZsopcWL52iOdVeelgF2iGOCWqf9TnJ4RcAIW1rCWtwyNBoFj3JrdYHdkheEc1ed5YR87tpiE5r/NXraNsDOGX+6Cs/JPTTJ8aU9BhVgdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('097e8b2597ec677795e676bcbab9e5a5')
 
-    i = 0                # 讓訊息只發一次的開關
-    hour_spec = 6       # 指定發送訊息時間
-    while True:
-        cur_sec = time.time()
-        cur_time = time.localtime(cur_sec)
-        if cur_time.tm_min == hour_spec + 1:
-            i = 0
-        if cur_time.tm_min == hour_spec:
-            if i == 1:
-                continue
-            message = client.messages.create(  
-                                      messaging_service_sid='MG1194dae546fa5791ccb7cd0630f86fa2', 
-                                      body=sentence_h3,      
-                                      to='+886938876892' 
-                                  ) 
-            print(message.sid)
 
-            message = client.messages.create(  
-                                      messaging_service_sid='MG1194dae546fa5791ccb7cd0630f86fa2', 
-                                      body=sentence_h2,      
-                                      to='+886938876892' 
-                                  ) 
-            print(message.sid)
-            i = 1
+@app.route("/callback", methods=['POST'])
+def callback():
+    # get X-Line-Signature header value
+    signature = request.headers['X-Line-Signature']
+
+    # get request body as text
+    body = request.get_data(as_text=True)
+    app.logger.info("Request body: " + body)
+
+    # handle webhook body
+    try:
+        handler.handle(body, signature)
+    except InvalidSignatureError:
+        print("Invalid signature. Please check your channel access token/channel secret.")
+        abort(400)
+
+    return 'OK'
+
+
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    msg = event.message.text
+    reply = '歡迎查詢Outlet班表'
+    time = datetime.date.today()
+    if '時間' in msg:
+        reply = '本地時間是：' + str(time)
+    elif:
+        'H2' in msg:
+        result = schedule.find_schedule('H2')
+        reply = schedule.show_result(result)
+    elif:
+        'H3' in msg:
+        result = schedule.find_schedule('H3')
+        reply = schedule.show_result(result)
+
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=reply))
+
+
+if __name__ == "__main__":
+    app.run()
