@@ -41,7 +41,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
-    reply = '歡迎查詢Outlet班表'
+    reply = '歡迎查詢Outlet班表\n' + '請輸入\'H2\'或\'H3\''
     time = datetime.date.today()
     if '時間' in msg:
         reply = '本地時間是：' + str(time)
