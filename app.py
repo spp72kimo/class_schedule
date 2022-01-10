@@ -42,15 +42,22 @@ def callback():
 def handle_message(event):
     msg = event.message.text
     reply = '歡迎查詢Outlet班表\n' + '請輸入\'H2\'或\'H3\''
-    time = datetime.date.today()
+    today = datetime.date.today()
+    day = today.day
     if '時間' in msg:
         reply = '本地時間是：' + str(time)
     elif 'H2' in msg:
-        result = schedule.find_schedule('H2')
+        result = schedule.find_schedule('H2', day)
         reply = schedule.show_result('H2', result)
     elif 'H3' in msg:
-        result = schedule.find_schedule('H3')
+        result = schedule.find_schedule('H3', day)
         reply = schedule.show_result('H3', result)
+    elif '明天' in msg:
+        day += 1
+        result = schedule.find_schedule('H2', day)
+        reply = schedule.show_result('H2', result, day)
+        result = schedule.find_schedule('H3', day)
+        reply = schedule.show_result('H3', result, day)
 
     line_bot_api.reply_message(
         event.reply_token,
