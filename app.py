@@ -48,16 +48,23 @@ def handle_message(event):
         reply = '本地時間是：' + str(time)
     elif 'H2' in msg:
         result = schedule.find_schedule('H2', day)
-        reply = schedule.show_result('H2', result)
+        reply = schedule.show_result('H2', result, day)
     elif 'H3' in msg:
         result = schedule.find_schedule('H3', day)
-        reply = schedule.show_result('H3', result)
+        reply = schedule.show_result('H3', result, day)
     elif '明天' in msg:
         day += 1
         result = schedule.find_schedule('H2', day)
         reply = schedule.show_result('H2', result, day)
         result = schedule.find_schedule('H3', day)
         reply = schedule.show_result('H3', result, day)
+    else:
+        day = int(msg)
+        result = schedule.find_schedule('H2', day)
+        reply = schedule.show_result('H2', result, day)
+        result = schedule.find_schedule('H3', day)
+        reply = schedule.show_result('H3', result, day)
+
 
     line_bot_api.reply_message(
         event.reply_token,
