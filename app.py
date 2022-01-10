@@ -70,7 +70,7 @@ def handle_message(event):
         result = schedule.find_schedule('H3', day)
         reply += schedule.show_result('H3', result, day)
     else:
-        reply = '歡迎查詢Outlet班表\n' + '請輸入\'H2\'或\'H3\'或\'明天\''
+        reply = '歡迎查詢Outlet班表\n' + '請輸入\'H2\'或\'H3\'或\'明天\'或\'日期\''
 
 
     line_bot_api.reply_message(
