@@ -10,7 +10,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 import datetime as t
-from schedule import schedule
+from schedule import schedule, find_schedule, find_kk
 
 
 app = Flask(__name__)
