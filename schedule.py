@@ -40,10 +40,12 @@ def show_result(store, result={}, d=today.day):
 		sentence += r + ' ' + result[r] + '\n'
 	return sentence
 
+# 結合 find_schedule() 和 show_result() 	return(str)
 def schedule(store='', day=today.day):
 	result = find_schedule(store, day)
 	return show_result(store, result, day)
 
+# 查詢小柯晚上是否一人上班
 def find_kk(result={}, day=today.day):
 	sentence=''
 	if result['小柯'] == '休假':

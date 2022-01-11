@@ -10,7 +10,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 import datetime as t
-import schedule
+from schedule import schedule
 
 
 app = Flask(__name__)
@@ -49,18 +49,18 @@ def handle_message(event):
     if '時間' in msg:
         reply = '遠端時間是：' + str(t.datetime.now()) + '\n' + '這裡時間是：' + str(dt2)
     elif 'H2' in msg:
-        reply = schedule.schedule('H2', day)
+        reply = schedule('H2', day)
     elif 'H3' in msg:
-        reply = schedule.schedule('H3', day)
+        reply = schedule('H3', day)
     elif '明天' in msg:
-        reply = schedule.schedule('H2', day+1)
-        reply += schedule.schedule('H3', day+1)
+        reply = schedule('H2', day+1)
+        reply += schedule('H3', day+1)
     elif '小柯' in msg:
-        result = schedule.find_schedule('H3', day)
-        reply = schedule.find_kk(result)
+        result = find_schedule('H3', day)
+        reply = find_kk(result)
     elif msg.isdigit() and int(msg) > 0 and int(msg) <= 31:
-        reply = schedule.schedule('H2', int(msg))
-        reply += schedule.schedule('H3', int(msg))
+        reply = schedule('H2', int(msg))
+        reply += schedule('H3', int(msg))
     else:
         reply = '歡迎查詢Outlet班表\n' + '請輸入:\n1. H2\n2. H3\n3. 明天\n4. 日期(1~31)'
 
