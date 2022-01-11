@@ -40,6 +40,7 @@ def show_result(store, result={}, d=today.day):
 		sentence += r + ' ' + result[r] + '\n'
 	return sentence
 
+# schedule.py的主函式
 # 結合 find_schedule() 和 show_result() 	return(str)
 def schedule(store='', day=today.day):
 	result = find_schedule(store, day)
