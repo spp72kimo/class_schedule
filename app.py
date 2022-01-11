@@ -62,7 +62,7 @@ def handle_message(event):
         reply = schedule.schedule('H2', int(msg))
         reply += schedule.schedule('H3', int(msg))
     else:
-        reply = '歡迎查詢Outlet班表\n' + '請輸入\'H2\'或\'H3\'或\'明天\'或\'日期\'(1~31)'
+        reply = '歡迎查詢Outlet班表\n' + '請輸入:\n1.\'H2\'\n2.\'H3\'\n3.\'明天\'\n4.\'日期\'(1~31)'
 
 
     line_bot_api.reply_message(
