@@ -49,28 +49,20 @@ def handle_message(event):
     if '時間' in msg:
         reply = '遠端時間是：' + str(t.datetime.now()) + '\n' + '這裡時間是：' + str(dt2)
     elif 'H2' in msg:
-        result = schedule.find_schedule('H2', day)
-        reply = schedule.show_result('H2', result, day)
+        reply = schedule.schedule('H2', day)
     elif 'H3' in msg:
-        result = schedule.find_schedule('H3', day)
-        reply = schedule.show_result('H3', result, day)
+        reply = schedule.schedule('H3', day)
     elif '明天' in msg:
-        day += 1
-        result = schedule.find_schedule('H2', day)
-        reply = schedule.show_result('H2', result, day)
-        result = schedule.find_schedule('H3', day)
-        reply += schedule.show_result('H3', result, day)
+        reply = schedule.schedule('H2', day+1)
+        reply += schedule.schedule('H3', day+1)
     elif '小柯' in msg:
         result = schedule.find_schedule('H3', day)
         reply = schedule.find_kk(result)
     elif msg.isdigit() and int(msg) > 0 and int(msg) <= 31:
-        day = int(msg)
-        result = schedule.find_schedule('H2', day)
-        reply = schedule.show_result('H2', result, day)
-        result = schedule.find_schedule('H3', day)
-        reply += schedule.show_result('H3', result, day)
+        reply = schedule.schedule('H2', int(msg))
+        reply += schedule.schedule('H3', int(msg))
     else:
-        reply = '歡迎查詢Outlet班表\n' + '請輸入\'H2\'或\'H3\'或\'明天\'或\'日期\''
+        reply = '歡迎查詢Outlet班表\n' + '請輸入\'H2\'或\'H3\'或\'明天\'或\'日期\'(1~31)'
 
 
     line_bot_api.reply_message(

@@ -32,6 +32,18 @@ def find_schedule(store='', day=today.day):
 				schedule[name.value] = represent(status)
 	return schedule
 
+# 將班表結果存成字串傳回 return(str)
+def show_result(store, result={}, d=today.day):
+	now = t.date(today.year, today.month, d)
+	sentence = str(now) + ' 當日班表：\n'
+	for r in result:
+		sentence += r + ' ' + result[r] + '\n'
+	return sentence
+
+def schedule(store='', day=today.day):
+	result = find_schedule(store, day)
+	return show_result(store, result, day)
+
 def find_kk(result={}, day=today.day):
 	sentence=''
 	if result['小柯'] == '休假':
@@ -47,12 +59,5 @@ def find_kk(result={}, day=today.day):
 	return sentence
 
 
-# 將班表結果存成字串傳回 return(str)
-def show_result(store, result={}, d=today.day):
-	now = t.date(today.year, today.month, d)
-	sentence = str(now) + ' 當日班表：\n'
-	for r in result:
-		sentence += r + ' ' + result[r] + '\n'
-	return sentence
 
 #print(show_result('H3',find_schedule('H3')))
