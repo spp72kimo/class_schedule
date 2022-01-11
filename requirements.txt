@@ -1,5 +1,7 @@
+django
 flask
 gunicorn
+django-heroku
 openpyxl
 line-bot-sdk
 datetime
