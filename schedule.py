@@ -50,7 +50,7 @@ def schedule(store='', day=today.day):
 def find_kk(result={}, day=today.day):
 	sentence=''
 	if result['小柯'] == '休假':
-		sentence = '小柯休假喔！'
+		sentence = '小柯今天休假喔！'
 	elif result['小柯'] == '早班':
 		sentence = '小柯早班喔！'
 	elif result['JOYA'] == '休假' and result['怡君'] == '早班':
