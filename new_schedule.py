@@ -1,9 +1,9 @@
 import openpyxl
 import calendar
 
-wb = openpyxl.load_workbook('2202.xlsx')
-print(wb.sheetnames)
-sheet = wb['10011']
+# 讀取舊班表表格
+wb = openpyxl.load_workbook('202201.xlsx')
+sheet = wb.worksheets[0]
 
 # 將原本班表底色清空
 cellRange = sheet['C4':'AG10']
@@ -17,14 +17,13 @@ for row in cellRange:
 	for c in row:
 		c.value = ''
 
-# 寫入月份
-sheet['C2'] = '二'
-
 # 將當月日期、星期填入儲存格
-month_range = calendar.monthrange(2022, 2)
+month_range = calendar.monthrange(2022, 3)	# 指定要新增的年份、月份
 max_days = month_range[1]
 weekday = month_range[0]
-# print(max_days)
+
+# 寫入月份
+sheet['C2'] = '三'
 
 # 寫入當月日期
 cellRange = sheet['C4':'AG4']
@@ -79,4 +78,4 @@ for c in list_column:
 		current_cell.fill = openpyxl.styles.PatternFill(start_color='FFFF66', end_color='FFFF66', fill_type='solid')
 
 # 儲存檔案
-wb.save('new2202.xlsx')
+wb.save('202203.xlsx')
