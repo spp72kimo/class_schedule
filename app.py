@@ -40,10 +40,10 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    dt1 = t.datetime.utcnow().replace(tzinfo=t.timezone.utc)
-    dt2 = dt1.astimezone(t.timezone(t.timedelta(hours=8))) # 轉換時區 -> 東八區    
-    day = dt2.day
-
+    utc_time = t.datetime.now(t.timezone.utc)
+    local_time = utc_time.now((t.timezone(t.timedelta(hours=8))))
+    day = local_time.day
+    print(day)
     msg = event.message.text
     
     if '時間' in msg:
