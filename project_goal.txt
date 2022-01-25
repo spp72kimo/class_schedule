@@ -2,9 +2,10 @@
 <完成>refactor 原本的程式
 <完成>增加查詢明日班表
 <完成>製作每月空格班表
-	Refactor new_schedual.py
-	用字典類別建立數字國字對換
-	包裝成class
+	<完成>Refactor new_schedual.py
+	<完成>用字典類別建立數字國字對換
+	查詢資料表最大rows，傳給修改目標
+	<完成>包裝成class
 	查詢聊天機器人可否傳送檔案
 修正時區問題
 實作Line聊天機器人的menu選單
