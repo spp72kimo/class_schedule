@@ -56,6 +56,7 @@ def handle_message(event):
         reply = schedule('H2', day+1)
         reply += schedule('H3', day+1)
     elif msg =='4':
+        reply = '請輸入欲查詢日期'
         if msg.isdigit() and int(msg) > 0 and int(msg) <= 31:
             reply = schedule('H2', int(msg))
             reply += schedule('H3', int(msg))
