@@ -2,7 +2,7 @@ from openpyxl import load_workbook
 import datetime as t
 
 today = t.date.today()								# 今天日期
-wb = load_workbook('202201.xlsx')					# 讀取班表Excel
+wb = load_workbook('202202.xlsx')					# 讀取班表Excel
 sheet = wb['10011']									# 選擇工作表sheet
 
 # 班表狀況格式化表示 return(str)
