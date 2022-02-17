@@ -1,6 +1,8 @@
 import openpyxl
 import calendar
-import datetime as t
+from datetime import datetime
+import re
+
 
 class new_scuedule:
 	# 共同屬性
@@ -27,8 +29,8 @@ class new_scuedule:
 				c.value = ''
 
 	# 將當月日期、星期填入儲存格
-	def set_month(self, month = 1):
-		month_range = calendar.monthrange(2022, month)	# 指定要新增的年份、月份
+	def set_month(self, year=2022, month = 1):
+		month_range = calendar.monthrange(year, month)	# 指定要新增的年份、月份
 		max_days = month_range[1] # 當月總共有幾天
 		weekday = month_range[0] # 當月第一天是星期幾
 
@@ -100,12 +102,29 @@ class new_scuedule:
 	def new_file(self, file_name = 'new_file'):
 		self.wb.save(file_name)
 
+	def check_input_time(self, inputTime=''):
+		timeRegex = re.compile(r'202[2-9][01][0-9]')
+		mo = timeRegex.match(inputTime)
+		if mo == None:
+			return False
+		else:
+			return True
+
+
 def main():
-	month = input('請輸入要新增班表的月份：')
 	w = new_scuedule()
+	inputTime = input('請輸入要新增班表的年分月份：')
+	if w.check_input_time(inputTime):
+		year = inputTime[0:4]
+		month = inputTime[4:6]
+	else:
+		print('日期輸入錯誤！')
+		return
+	
 	w.open_file()
 	w.clear_cell()
-	w.set_month(int(month))
-	w.new_file(str(t.date.today().year) + '-' + month + '.xlsx')
+	w.set_month(int(year),int(month))
+	t = datetime.now()
+	w.new_file(f"{year}{month}.xlsx")
 
 main()
