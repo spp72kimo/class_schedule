@@ -70,8 +70,9 @@ def handle_message(event):
         min = int(msg_list[1])
         max = int(msg_list[2])
         for d in range(min,max+1):
-            reply = schedule('H2', d)
-            reply += schedule('H3', d)
+            result = schedule('H2', d)
+            result += schedule('H3', d)
+            reply += result
     elif cmd == '小柯':
         result = find_schedule('H3', day)
         reply = find_kk(result)
