@@ -47,20 +47,28 @@ def handle_message(event):
     day = local_time.day
     print(day)
     msg = event.message.text
+
+    msg_list = msg.split()
+    cmd = msg_list[0]
     
-    if '時間' in msg:
+    if cmd == '時間':
         reply = '遠端時間是：' + str(t.datetime.now()) + '\n' + '這裡時間是：' + str(dt2)
-    elif msg == 'H2':
+    elif cmd == '當日':
         reply = schedule('H2', day)
-    elif msg == 'H3':
-        reply = schedule('H3', day)
-    elif msg == '明天':
+        reply += schedule('H3', day)
+    elif cmd == '明天':
         reply = schedule('H2', day+1)
         reply += schedule('H3', day+1)
-    elif msg.isdigit() and int(msg) > 0 and int(msg) <= 31:
+    elif cmd.isdigit() and int(msg) > 0 and int(msg) <= 31:
         reply = schedule('H2', int(msg))
         reply += schedule('H3', int(msg))
-    elif '小柯' in msg:
+    elif cmd == '區間':
+        min = msg_list[1]
+        max = msg_list[2]
+        for d in range(min,max+1):
+            reply = schedule('H2', d)
+            reply += schedule('H3', d)
+    elif cmd == '小柯':
         result = find_schedule('H3', day)
         reply = find_kk(result)
     else:
