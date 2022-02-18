@@ -67,8 +67,8 @@ def handle_message(event):
         reply = schedule('H2', int(msg))
         reply += schedule('H3', int(msg))
     elif cmd == '區間':
-        min = msg_list[1]
-        max = msg_list[2]
+        min = int(msg_list[1])
+        max = int(msg_list[2])
         for d in range(min,max+1):
             reply = schedule('H2', d)
             reply += schedule('H3', d)
