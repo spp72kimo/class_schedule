@@ -91,7 +91,17 @@ def handle_message(event):
             w.set_month()
             w.new_file()
     else:
-        reply = '歡迎查詢Outlet班表\n' + '請輸入:\n1. H2\n2. H3\n3. 當天\n4. 明天\n5. 日期(1~31)\n6. 區間 (1~31) (1~31)'
+        reply = '''
+        歡迎查詢Outlet班表\n
+        請輸入:\n
+        1. H2\n
+        2. H3\n
+        3. 當天\n
+        4. 明天\n
+        5. 日期(1~31)\n
+        6. 區間 (1~31) (1~31)\n
+        7. 新增 (202203)
+        '''
 
 
     line_bot_api.reply_message(
