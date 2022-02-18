@@ -112,6 +112,7 @@ class New_schedule:
 	# 儲存檔案
 	def new_file(self):
 		self.wb.save(f'{self.year}{self.month}.xlsx')
+		print(f'{self.year}{self.month}.xlsx存檔成功！')
 
 
 
