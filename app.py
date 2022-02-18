@@ -57,7 +57,7 @@ def handle_message(event):
         reply = schedule('H2', day)
     elif cmd == 'H3':
         reply = schedule('H3', day)
-    elif cmd == '當日':
+    elif cmd == '當天':
         reply = schedule('H2', day)
         reply += schedule('H3', day)
     elif cmd == '明天':
@@ -79,7 +79,7 @@ def handle_message(event):
         result = find_schedule('H3', day)
         reply = find_kk(result)
     else:
-        reply = '歡迎查詢Outlet班表\n' + '請輸入:\n1. H2\n2. H3\n3. 明天\n4. 日期(1~31)'
+        reply = '歡迎查詢Outlet班表\n' + '請輸入:\n1. H2\n2. H3\n3. 當天\n4. 明天\n5. 日期(1~31)\n6. 區間 (1~31) (1~31)'
 
 
     line_bot_api.reply_message(
