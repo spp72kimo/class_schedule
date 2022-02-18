@@ -35,7 +35,7 @@ def find_schedule(store='', day=today.day):
 # 將班表結果存成字串傳回 return(str)
 def show_result(store, result={}, d=today.day):
 	now = t.date(today.year, today.month, d)
-	sentence = str(now) + f'{store} 當日班表：\n'
+	sentence = str(now) + f' {store} 當日班表：\n'
 	for r in result:
 		sentence += r + ' ' + result[r] + '\n'
 	return sentence
