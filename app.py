@@ -91,8 +91,7 @@ def handle_message(event):
             w.set_month()
             w.new_file()
     else:
-        reply = '''
-        歡迎查詢Outlet班表\n
+        reply = '''歡迎查詢Outlet班表\n
         請輸入:\n
         1. H2\n
         2. H3\n
