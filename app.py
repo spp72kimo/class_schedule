@@ -90,6 +90,7 @@ def handle_message(event):
             w.clear_cell()
             w.set_month()
             w.new_file()
+            reply = f'新增班表{inputTime}成功！'
     else:
         reply = '''歡迎查詢Outlet班表\n
         請輸入:\n
