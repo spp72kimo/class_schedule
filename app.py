@@ -84,7 +84,7 @@ def handle_message(event):
         try:
             w = New_schedule(inputTime)
         except ValueError as msg:
-            print(msg)
+            reply = msg
         else:
             w.open_file()
             w.clear_cell()
