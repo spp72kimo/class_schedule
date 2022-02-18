@@ -53,6 +53,10 @@ def handle_message(event):
     
     if cmd == '時間':
         reply = '遠端時間是：' + str(t.datetime.now()) + '\n' + '這裡時間是：' + str(dt2)
+    elif cmd =='H2':
+        reply = schedule('H2', day)
+    elif cmd == 'H3':
+        reply = schedule('H3', day)
     elif cmd == '當日':
         reply = schedule('H2', day)
         reply += schedule('H3', day)
