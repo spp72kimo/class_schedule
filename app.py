@@ -13,6 +13,7 @@ import datetime as t
 
 # 引入 schedlue module
 from schedule import schedule, find_schedule, find_kk
+from new_schedule import New_schedule
 
 
 app = Flask(__name__)
@@ -78,6 +79,17 @@ def handle_message(event):
     elif cmd == '小柯':
         result = find_schedule('H3', day)
         reply = find_kk(result)
+    elif cmd == '新增':
+        inputTime = msg_list[1]
+        try:
+            w = New_schedule(inputTime)
+        except ValueError as msg:
+            print(msg)
+        else:
+            w.open_file()
+            w.clear_cell()
+            w.set_month()
+            w.new_file()
     else:
         reply = '歡迎查詢Outlet班表\n' + '請輸入:\n1. H2\n2. H3\n3. 當天\n4. 明天\n5. 日期(1~31)\n6. 區間 (1~31) (1~31)'
 

@@ -4,11 +4,22 @@ from datetime import datetime
 import re
 
 
-class new_scuedule:
+class New_schedule:
 	# 共同屬性
-	def __init__(self):
+	def __init__(self,inputTime='202203'):
 		self.wb = ''
 		self.sheet = ''
+		self.year = ''
+		self.month = ''
+
+		timeRegex = re.compile(r'202[2-9][01][0-9]')
+		mo = timeRegex.match(inputTime)
+		if mo == None:
+			raise ValueError('請輸入正確日期！')
+		else:
+			self.year = inputTime[0:4]
+			self.month = inputTime[4:6]
+
 
 	# 讀取舊班表表格
 	def open_file(self, file_name='202201.xlsx'):
@@ -29,8 +40,8 @@ class new_scuedule:
 				c.value = ''
 
 	# 將當月日期、星期填入儲存格
-	def set_month(self, year=2022, month = 1):
-		month_range = calendar.monthrange(year, month)	# 指定要新增的年份、月份
+	def set_month(self):
+		month_range = calendar.monthrange(int(self.year), int(self.month))	# 指定要新增的年份、月份
 		max_days = month_range[1] # 當月總共有幾天
 		weekday = month_range[0] # 當月第一天是星期幾
 
@@ -49,7 +60,7 @@ class new_scuedule:
 		11 : '十一', 
 		12 : '十二'
 		}
-		self.sheet['C2'] = month_trans_str[month]
+		self.sheet['C2'] = month_trans_str[int(self.month)]
 
 		# 寫入當月日期
 		cellRange = self.sheet['C4':'AG4']
@@ -99,32 +110,21 @@ class new_scuedule:
 				current_cell.fill = openpyxl.styles.PatternFill(start_color='FFFF66', end_color='FFFF66', fill_type='solid')
 
 	# 儲存檔案
-	def new_file(self, file_name = 'new_file'):
-		self.wb.save(file_name)
+	def new_file(self):
+		self.wb.save(f'{self.year}{self.month}.xlsx')
 
-	def check_input_time(self, inputTime=''):
-		timeRegex = re.compile(r'202[2-9][01][0-9]')
-		mo = timeRegex.match(inputTime)
-		if mo == None:
-			return False
-		else:
-			return True
 
 
 def main():
-	w = new_scuedule()
-	inputTime = input('請輸入要新增班表的年分月份：')
-	if w.check_input_time(inputTime):
-		year = inputTime[0:4]
-		month = inputTime[4:6]
+	try:
+		w = New_schedule()
+	except ValueError as msg:
+		print(msg)
 	else:
-		print('日期輸入錯誤！')
-		return
-	
-	w.open_file()
-	w.clear_cell()
-	w.set_month(int(year),int(month))
-	t = datetime.now()
-	w.new_file(f"{year}{month}.xlsx")
+		w.open_file()
+		w.clear_cell()
+		w.set_month()
+		w.new_file()
 
-main()
+if __name__ == '__main__':
+	main()
