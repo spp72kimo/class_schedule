@@ -69,10 +69,12 @@ def handle_message(event):
     elif cmd == '區間':
         min = int(msg_list[1])
         max = int(msg_list[2])
+        text = ''
         for d in range(min,max+1):
             result = schedule('H2', d)
             result += schedule('H3', d)
-            reply += result
+            text += result
+        reply = text
     elif cmd == '小柯':
         result = find_schedule('H3', day)
         reply = find_kk(result)
