@@ -9,6 +9,7 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
+
 import datetime as t
 
 # 引入 schedlue module
@@ -43,11 +44,15 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    message_type = event.message.type
+    user_id = event.source.user_id
+    reply_token = event.reply_token
+    msg = event.message.text
     utc_time = t.datetime.now(t.timezone.utc)
     local_time = utc_time.now((t.timezone(t.timedelta(hours=8))))
     day = local_time.day
     print(day)
-    msg = event.message.text
+    
 
     msg_list = msg.split()
     cmd = msg_list[0]
@@ -108,6 +113,8 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text=reply))
 
-
+# import os
 if __name__ == "__main__":
     app.run()
+    # port = int(os.environ.get('PORT', 80))
+    # app.run(host='0.0.0.0',port=port)
