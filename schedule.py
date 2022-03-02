@@ -5,7 +5,7 @@ today = t.date.today()
 timeString = str(t.date.today())
 monthString = timeString[5:7]
 print(monthString)							# 今天日期
-wb = load_workbook(f'2022{monthString}.xlsx')					# 讀取班表Excel
+wb = load_workbook(f'2022{monthString}.xlsx')		# 讀取班表Excel
 sheet = wb['10011']									# 選擇工作表sheet
 
 # 班表狀況格式化表示 return(str)
