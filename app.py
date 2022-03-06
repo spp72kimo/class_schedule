@@ -15,7 +15,6 @@ import datetime as t
 # 引入 schedlue module
 from schedule import find_name_schedule, schedule, find_schedule, find_kk
 from new_schedule import New_schedule
-import os
 
 
 app = Flask(__name__)
@@ -121,6 +120,6 @@ def handle_message(event):
 
 # import os
 if __name__ == "__main__":
-    # app.run()
-    port = int(os.environ.get('PORT', 80))
-    app.run(host='0.0.0.0', port=port)
+    app.run()
+    # port = int(os.environ.get('PORT', 80))
+    # app.run(host='0.0.0.0', port=port)
