@@ -1,8 +1,6 @@
 from openpyxl import load_workbook
 import datetime as t
 
-from sqlalchemy import column
-
 today = t.date.today()
 timeString = str(t.date.today())
 monthString = timeString[5:7]
