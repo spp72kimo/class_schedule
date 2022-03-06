@@ -13,13 +13,15 @@ from linebot.models import (
 import datetime as t
 
 # 引入 schedlue module
-from schedule import schedule, find_schedule, find_kk
+from schedule import find_name_schedule, schedule, find_schedule, find_kk
 from new_schedule import New_schedule
+import os
 
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('RuY0urC5XyZu/m4kzz2T4Kycwiiky6qcI7ANvcDg6FWszscZsopcWL52iOdVeelgF2iGOCWqf9TnJ4RcAIW1rCWtwyNBoFj3JrdYHdkheEc1ed5YR87tpiE5r/NXraNsDOGX+6Cs/JPTTJ8aU9BhVgdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi(
+    'RuY0urC5XyZu/m4kzz2T4Kycwiiky6qcI7ANvcDg6FWszscZsopcWL52iOdVeelgF2iGOCWqf9TnJ4RcAIW1rCWtwyNBoFj3JrdYHdkheEc1ed5YR87tpiE5r/NXraNsDOGX+6Cs/JPTTJ8aU9BhVgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('097e8b2597ec677795e676bcbab9e5a5')
 
 
@@ -52,14 +54,14 @@ def handle_message(event):
     local_time = utc_time.now((t.timezone(t.timedelta(hours=8))))
     day = local_time.day
     print(day)
-    
 
     msg_list = msg.split()
     cmd = msg_list[0]
-    
+
     if cmd == '時間':
-        reply = '遠端時間是：' + str(t.datetime.now()) + '\n' + '這裡時間是：' + str(dt2)
-    elif cmd =='H2':
+        reply = '遠端時間是：' + str(t.datetime.now()) + \
+            '\n' + '這裡時間是：' + str(local_time)
+    elif cmd == 'H2':
         reply = schedule('H2', day)
     elif cmd == 'H3':
         reply = schedule('H3', day)
@@ -76,14 +78,18 @@ def handle_message(event):
         min = int(msg_list[1])
         max = int(msg_list[2])
         text = ''
-        for d in range(min,max+1):
+        for d in range(min, max+1):
             result = schedule('H2', d)
             result += schedule('H3', d)
             text += result
         reply = text
-    elif cmd == '小柯':
-        result = find_schedule('H3', day)
-        reply = find_kk(result)
+    elif cmd.upper() == '小柯' or '怡君' or 'JOYA' or '小芬' or '小侑':
+        if cmd == "小柯":
+            result = find_schedule('H3', day)
+            reply = find_kk(result) + "\n"
+            reply += find_name_schedule(cmd)
+        else:
+            reply = find_name_schedule(cmd.upper())
     elif cmd == '新增':
         inputTime = msg_list[1]
         try:
@@ -108,13 +114,13 @@ def handle_message(event):
         7. 新增 (202203)
         '''
 
-
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=reply))
 
+
 # import os
 if __name__ == "__main__":
-    app.run()
-    # port = int(os.environ.get('PORT', 80))
-    # app.run(host='0.0.0.0',port=port)
+    # app.run()
+    port = int(os.environ.get('PORT', 80))
+    app.run(host='0.0.0.0', port=port)
