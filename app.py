@@ -56,6 +56,7 @@ def handle_message(event):
 
     msg_list = msg.split()
     cmd = msg_list[0]
+    name_list = ["小柯","JOYA","怡君","小芬","小侑"]
 
     if cmd == '時間':
         reply = '遠端時間是：' + str(t.datetime.now()) + \
@@ -82,7 +83,7 @@ def handle_message(event):
             result += schedule('H3', d)
             text += result
         reply = text
-    elif cmd.upper() == ('小柯' or '怡君' or 'JOYA' or '小芬' or '小侑'):
+    elif cmd.upper() in name_list:
         if cmd == "小柯":
             result = find_schedule('H3', day)
             reply = find_kk(result) + "\n"
