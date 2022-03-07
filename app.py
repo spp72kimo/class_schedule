@@ -82,7 +82,7 @@ def handle_message(event):
             result += schedule('H3', d)
             text += result
         reply = text
-    elif cmd.upper() == '小柯' or '怡君' or 'JOYA' or '小芬' or '小侑':
+    elif cmd.upper() == ('小柯' or '怡君' or 'JOYA' or '小芬' or '小侑'):
         if cmd == "小柯":
             result = find_schedule('H3', day)
             reply = find_kk(result) + "\n"
