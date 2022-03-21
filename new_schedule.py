@@ -117,9 +117,9 @@ class New_schedule:
 
 
 def main():
-	input_time = input('請輸入要新增的年月：')
+	input_time = input('請輸入要新增的年月(ex.202203)：')
 	try:
-		w = New_schedule()
+		w = New_schedule(input_time)
 	except ValueError as msg:
 		print(msg)
 	else:
